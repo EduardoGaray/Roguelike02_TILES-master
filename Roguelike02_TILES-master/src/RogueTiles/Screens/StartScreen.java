@@ -20,8 +20,8 @@ public class StartScreen implements Screen {
 	}
 
 	public void displayOutput(Graphics2D g2) {
-		g2.drawString("rl tutorial", 1,1);
-		g2.drawString("-- press [enter] to start --", 1,22);
+		g2.drawString("rl tutorial", 1,22);
+		g2.drawString("-- press [enter] to start --", 1,44);
 	}
 
 	public Screen respondToUserInput(KeyEvent key) {
