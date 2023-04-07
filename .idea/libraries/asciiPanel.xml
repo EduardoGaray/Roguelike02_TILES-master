@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="asciiPanel">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Roguelike02_TILES-master/out/production/Roguelike2d/jar/asciiPanel.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
