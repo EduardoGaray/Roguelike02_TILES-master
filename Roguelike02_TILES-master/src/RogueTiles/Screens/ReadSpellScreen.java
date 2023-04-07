@@ -6,6 +6,7 @@ import RogueAscii.Main.Spell;
 import RogueTiles.Main.TilesPanel;
 import asciiPanel.AsciiPanel;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -76,6 +77,11 @@ public class ReadSpellScreen implements Screen {
         } else {
             return this;
         }
+    }
+
+    @Override
+    public void displayOutput(Graphics2D g2) {
+
     }
 
     protected Screen use(Spell spell){

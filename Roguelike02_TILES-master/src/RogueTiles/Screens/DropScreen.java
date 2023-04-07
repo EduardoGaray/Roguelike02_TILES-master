@@ -5,6 +5,7 @@ import RogueAscii.Main.Item;
 import RogueTiles.Main.TilesPanel;
 import asciiPanel.AsciiPanel;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class DropScreen extends InventoryBasedScreen {
@@ -37,7 +38,12 @@ public class DropScreen extends InventoryBasedScreen {
 
     }
 
-	protected String getVerb() {
+    @Override
+    public void displayOutput(Graphics2D g2) {
+
+    }
+
+    protected String getVerb() {
         return "drop";
     }
 

@@ -5,6 +5,8 @@ import RogueAscii.Main.Line;
 import RogueAscii.Main.Point;
 import RogueTiles.Main.TilesPanel;
 
+import java.awt.*;
+
 public class FireWeaponScreen extends TargetBasedScreen {
 
     public FireWeaponScreen(Creature player, int sx, int sy) {
@@ -34,6 +36,11 @@ public class FireWeaponScreen extends TargetBasedScreen {
 
     @Override
     public void displayOutput(TilesPanel tp) {
+
+    }
+
+    @Override
+    public void displayOutput(Graphics2D g2) {
 
     }
 }

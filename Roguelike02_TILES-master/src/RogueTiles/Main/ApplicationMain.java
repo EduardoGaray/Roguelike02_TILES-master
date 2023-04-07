@@ -19,35 +19,30 @@ public class ApplicationMain extends JFrame implements KeyListener {
 
 	public ApplicationMain() {
 		super();
+		screen = new StartScreen();
 		tp = new TilesPanel();
+		tp.setScreen(screen);
 		this.getContentPane().add(tp);
 		tp.startGameThread();
 		pack();
-		screen = new StartScreen();
 		addKeyListener(this);
 		repaint();
 	}
 
-	public void repaint() {
-		//terminal.clear();
-		//screen.displayOutput(terminal);
-		//tp.clear();
-		screen.displayOutput(tp);
-		super.repaint();
+	@Override
+	public void keyTyped(KeyEvent e) {
+
 	}
 
 	public void keyPressed(KeyEvent e) {
 		screen = screen.respondToUserInput(e);
+		tp.setScreen(screen);
 		repaint();
 	}
 
-
+	@Override
 	public void keyReleased(KeyEvent e) {
-	}
 
-	public void keyTyped(KeyEvent e) {
-//		screen = screen.respondToUserInput(e);
-//		repaint();
 	}
 
 	public static void main(String[] args) {

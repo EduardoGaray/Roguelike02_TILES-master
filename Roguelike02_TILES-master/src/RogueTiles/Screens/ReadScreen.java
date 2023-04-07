@@ -5,6 +5,7 @@ import RogueAscii.Main.Item;
 import RogueTiles.Main.TilesPanel;
 import asciiPanel.AsciiPanel;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ReadScreen extends InventoryBasedScreen {
@@ -51,6 +52,11 @@ public class ReadScreen extends InventoryBasedScreen {
 
     @Override
     public void displayOutput(TilesPanel tp) {
+
+    }
+
+    @Override
+    public void displayOutput(Graphics2D g2) {
 
     }
 }

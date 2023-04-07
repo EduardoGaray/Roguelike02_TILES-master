@@ -4,6 +4,8 @@ import RogueAscii.Main.Creature;
 import RogueAscii.Main.Spell;
 import RogueTiles.Main.TilesPanel;
 
+import java.awt.*;
+
 public class CastSpellScreen extends TargetBasedScreen {
     private Spell spell;
     
@@ -18,6 +20,11 @@ public class CastSpellScreen extends TargetBasedScreen {
 
     @Override
     public void displayOutput(TilesPanel tp) {
+
+    }
+
+    @Override
+    public void displayOutput(Graphics2D g2) {
 
     }
 }

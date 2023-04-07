@@ -5,6 +5,7 @@ import asciiPanel.AsciiPanel;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class StartScreen implements Screen {
 
@@ -15,10 +16,12 @@ public class StartScreen implements Screen {
 
 	@Override
 	public void displayOutput(TilesPanel tp) {
-		Image img = tp.createTile();
-		Graphics g = tp.getGraphics();
-		tp.paint(g,img);
 
+	}
+
+	public void displayOutput(Graphics2D g2) {
+		g2.drawString("rl tutorial", 1,1);
+		g2.drawString("-- press [enter] to start --", 1,22);
 	}
 
 	public Screen respondToUserInput(KeyEvent key) {

@@ -3,6 +3,7 @@ package RogueTiles.Screens;
 import RogueTiles.Main.TilesPanel;
 import asciiPanel.AsciiPanel;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class WinScreen implements Screen {
@@ -20,4 +21,9 @@ public class WinScreen implements Screen {
 	public Screen respondToUserInput(KeyEvent key) {
 	        return key.getKeyCode() == KeyEvent.VK_ENTER ? new PlayScreen() : this;
 	    }
+
+	@Override
+	public void displayOutput(Graphics2D g2) {
+
+	}
 }

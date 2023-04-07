@@ -153,6 +153,11 @@ public class PlayScreen implements Screen {
 		return this;
 	}
 
+	@Override
+	public void displayOutput(Graphics2D g2) {
+
+	}
+
 	public PlayScreen() {
 		screenWidth = 80;
 		screenHeight = 21;

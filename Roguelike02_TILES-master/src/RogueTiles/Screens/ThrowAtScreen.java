@@ -6,6 +6,8 @@ import RogueAscii.Main.Line;
 import RogueAscii.Main.Point;
 import RogueTiles.Main.TilesPanel;
 
+import java.awt.*;
+
 
 public class ThrowAtScreen extends TargetBasedScreen {
     private Item item;
@@ -33,6 +35,11 @@ public class ThrowAtScreen extends TargetBasedScreen {
 
     @Override
     public void displayOutput(TilesPanel tp) {
+
+    }
+
+    @Override
+    public void displayOutput(Graphics2D g2) {
 
     }
 }

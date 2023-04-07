@@ -5,6 +5,7 @@ import RogueAscii.Main.LevelUpController;
 import RogueTiles.Main.TilesPanel;
 import asciiPanel.AsciiPanel;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
@@ -59,4 +60,9 @@ public class LevelUpScreen implements Screen {
 	    else
 	      return this;
 	  }
+
+	@Override
+	public void displayOutput(Graphics2D g2) {
+
 	}
+}

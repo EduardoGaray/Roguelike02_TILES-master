@@ -5,6 +5,8 @@ import RogueAscii.Main.Item;
 import RogueAscii.Main.Tile;
 import RogueTiles.Main.TilesPanel;
 
+import java.awt.*;
+
 public class LookScreen extends TargetBasedScreen {
 
     public LookScreen(Creature player, String caption, int sx, int sy) {
@@ -30,6 +32,11 @@ public class LookScreen extends TargetBasedScreen {
 
     @Override
     public void displayOutput(TilesPanel tp) {
+
+    }
+
+    @Override
+    public void displayOutput(Graphics2D g2) {
 
     }
 }
