@@ -14,12 +14,6 @@ public class StartScreen implements Screen {
 		terminal.writeCenter("-- press [enter] to start --", 22);
 	}
 
-	public void displayOutput(TilesPanel tp) {
-		Graphics g = tp.getGraphics();
-		Image img = tp.createTile();
-		tp.paint(g,img);
-	}
-
 	public Screen respondToUserInput(KeyEvent key) {
 		return key.getKeyCode() == KeyEvent.VK_ENTER ? new PlayScreen() : this;
 	}

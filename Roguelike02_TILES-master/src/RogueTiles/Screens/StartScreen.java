@@ -20,8 +20,12 @@ public class StartScreen implements Screen {
 	}
 
 	public void displayOutput(Graphics2D g2) {
-		g2.drawString("rl tutorial", 1,22);
-		g2.drawString("-- press [enter] to start --", 1,44);
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80f));
+		String title = "Roguelike Project";
+		String subTitle = "-- Press [enter] to start --";
+
+		g2.drawString("Roguelike Project", 10,22);
+		g2.drawString("-- Press [enter] to start --", 10,44);
 	}
 
 	public Screen respondToUserInput(KeyEvent key) {

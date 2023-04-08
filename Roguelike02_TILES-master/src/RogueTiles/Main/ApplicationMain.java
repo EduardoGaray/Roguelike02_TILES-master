@@ -24,6 +24,7 @@ public class ApplicationMain extends JFrame {
 		this.add(tp);
 		this.pack();
 		this.setLocationRelativeTo(null);
+		this.setSize(tp.screenWidth, tp.screenHeight);
 		this.setVisible(true);
 		tp.startGameThread();
 	}

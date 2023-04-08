@@ -47,17 +47,14 @@ public class TilesPanel extends JPanel implements Runnable {
 
     public TilesPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setSize(screenWidth,screenHeight);
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
 
-    public void paint(Graphics g, Image img) {
-        g.drawImage(img, 16,16,this);
-    }
-
-    public Image createTile() {
+    public Image exampleCreateTile() {
         BufferedImage image = null;
         try {
             File img = new File("Roguelike02_TILES-master/res/tiles/grass.png");
@@ -69,7 +66,7 @@ public class TilesPanel extends JPanel implements Runnable {
         return image;
     }
 
-    public Image createText() {
+    public Image exampleCreateText() {
         BufferedImage bufferedImage = new BufferedImage(200,200,BufferedImage.TYPE_INT_RGB);
         Graphics g = bufferedImage.getGraphics();
 
