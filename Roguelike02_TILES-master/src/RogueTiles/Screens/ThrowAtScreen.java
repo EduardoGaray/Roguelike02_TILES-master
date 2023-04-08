@@ -39,7 +39,7 @@ public class ThrowAtScreen extends TargetBasedScreen {
     }
 
     @Override
-    public void displayOutput(Graphics2D g2) {
+    public void displayOutput(Graphics2D g2, TilesPanel t) {
 
     }
 }

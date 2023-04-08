@@ -53,8 +53,9 @@ public class ExamineScreen extends InventoryBasedScreen {
     }
 
     @Override
-    public void displayOutput(Graphics2D g2) {
+    public void displayOutput(Graphics2D g2, TilesPanel tp) {
 
     }
+
 }
 

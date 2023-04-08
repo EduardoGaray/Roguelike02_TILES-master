@@ -17,6 +17,17 @@ public class TilesPanel extends JPanel implements Runnable {
     public final int originalTileSize = 16; //16x16 tile
     public final int scale = 3; // scale to resolution
 
+    //FONT
+    public Font mainFont;
+
+    public Font getMainFont() {
+        return mainFont;
+    }
+
+    public void setMainFont() {
+        this.mainFont = mainFont;
+    }
+
     public int tileSize = originalTileSize * scale; //48x48 tile
     public int maxScreenCol = 16; // ^ v
     public int maxScreenRow = 12; // <>
@@ -52,6 +63,17 @@ public class TilesPanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        try {
+            //create the font to use. Specify the size!
+            this.mainFont = Font.createFont(Font.TRUETYPE_FONT, new File("Roguelike02_TILES-master/res/fonts/MorrisRoman-Black.ttf")).deriveFont(24f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            //register the font
+            ge.registerFont(this.mainFont);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch(FontFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     public Image exampleCreateTile() {
@@ -116,7 +138,7 @@ public class TilesPanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        screen.displayOutput(g2);
+        screen.displayOutput(g2,this);
         g2.dispose();
     }
 

@@ -14,5 +14,5 @@ public interface Screen {
 
 	public Screen respondToUserInput(KeyEvent key);
 
-    public void displayOutput(Graphics2D g2);
+    public void displayOutput(Graphics2D g2,TilesPanel tp);
 }
