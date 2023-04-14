@@ -13,13 +13,13 @@ import java.util.Objects;
 public class TileManager {
     GamePanel gp;
     //Right now this is the array that we use to create the current game map, later on we must create every map in a separate array and save/load them as needed
-    public Tile[] tile;
+    public Tile_old[] tileOld;
     public int[][] mapTileNum;
 
     public TileManager(GamePanel gp) {
         //Here we initialize the process to create the map
         this.gp = gp;
-        tile = new Tile[gp.maxWorldCol * gp.maxWorldRow];
+        tileOld = new Tile_old[gp.maxWorldCol * gp.maxWorldRow];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
         loadMap("/maps/world01.txt");
@@ -29,21 +29,21 @@ public class TileManager {
     //this method generates basic tiles randomly, we can work on a more complex system for map generation from here
     public void getTileImage() {
         try {
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall00.png")));
-            tile[1].collision = true;
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png")));
-            tile[2].collision = true;
-            tile[3] = new Tile();
-            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earth.png")));
-            tile[4] = new Tile();
-            tile[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree.png")));
-            tile[4].collision = true;
-            tile[5] = new Tile();
-            tile[5].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/sand.png")));
+            tileOld[0] = new Tile_old();
+            tileOld[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
+            tileOld[1] = new Tile_old();
+            tileOld[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall00.png")));
+            tileOld[1].collision = true;
+            tileOld[2] = new Tile_old();
+            tileOld[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png")));
+            tileOld[2].collision = true;
+            tileOld[3] = new Tile_old();
+            tileOld[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earth.png")));
+            tileOld[4] = new Tile_old();
+            tileOld[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree.png")));
+            tileOld[4].collision = true;
+            tileOld[5] = new Tile_old();
+            tileOld[5].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/sand.png")));
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -96,7 +96,7 @@ public class TileManager {
                     worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                     worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                     worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                g2.drawImage(tileOld[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             }
             Worldcol++;
 

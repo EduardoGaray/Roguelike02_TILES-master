@@ -1,20 +1,47 @@
 package OtherWorld.tile;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
-public class Tile {
-    public BufferedImage image;
-    public boolean collision = false;
+public enum Tile {
+    FLOOR("/tiles/grass.png"),
+    WALL("/tiles/tree.png"),
+    BOUNDS("/tiles/water.png");
 
-    public String desc;
+    String file;
+    int height = 48;
 
-    public String name;
-    public String filename;
-    public String type;
+    public String getFile() {
+        return file;
+    }
 
-    public int x, y;
-    public int screenx, screeny;
-    public int neighbors;
-    public int id;
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    int width = 48;
+    Tile(String file) {
+        this.file = file;
+        this.width = width;
+        this.height = height;
+    }
 
 }
