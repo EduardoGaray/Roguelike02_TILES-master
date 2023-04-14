@@ -1,32 +1,16 @@
-package RogueTiles.Main;
+package OtherWorld.main;
 
+import OtherWorld.entity.Player;
+import OtherWorld.tile.TileManager;
 
-import RogueTiles.Screens.Screen;
-
+import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
-public class TilesPanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable {
 
     //SCREEN SETTINGS
     public final int originalTileSize = 16; //16x16 tile
     public final int scale = 3; // scale to resolution
-
-    //FONT
-    public Font mainFont;
-
-    public Font getMainFont() {
-        return mainFont;
-    }
-
-    public void setMainFont() {
-        this.mainFont = mainFont;
-    }
 
     public int tileSize = originalTileSize * scale; //48x48 tile
     public int maxScreenCol = 16; // ^ v
@@ -40,61 +24,38 @@ public class TilesPanel extends JPanel implements Runnable {
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
 
-    private Screen screen;
-
     //FPS
     int fps = 60;
 
+    TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler(this);
     Thread gameThread; //When we call this thread, it automatically calls its run() method
+    public CollisionChecker cChecker = new CollisionChecker(this);
+    public Player player = new Player(this, keyH);
 
-    public Screen getScreen() {
-        return screen;
-    }
 
-    public void setScreen(Screen screen) {
-        this.screen = screen;
-    }
-
-    public TilesPanel() {
+    public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setSize(screenWidth,screenHeight);
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-        try {
-            //create the font to use. Specify the size!
-            this.mainFont = Font.createFont(Font.TRUETYPE_FONT, new File("Roguelike02_TILES-master/res/fonts/MorrisRoman-Black.ttf")).deriveFont(24f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            //register the font
-            ge.registerFont(this.mainFont);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch(FontFormatException e) {
-            e.printStackTrace();
-        }
     }
 
-    public Image exampleCreateTile() {
-        BufferedImage image = null;
-        try {
-            File img = new File("Roguelike02_TILES-master/res/tiles/grass.png");
-            image = ImageIO.read(img);
-            //System.out.println(image);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return image;
-    }
+    public void zoomInOut(int i) {
 
-    public Image exampleCreateText() {
-        BufferedImage bufferedImage = new BufferedImage(200,200,BufferedImage.TYPE_INT_RGB);
-        Graphics g = bufferedImage.getGraphics();
+        int oldWorldWidth = tileSize * maxWorldCol;
+        tileSize += i;
+        int newWorldWidth = tileSize * maxWorldCol;
 
-        g.drawString("hghgghghhg", 20,20);
+        player.speed = (double)newWorldWidth/600;
+        double multiplier = (double) newWorldWidth / oldWorldWidth;
+        double newPlayerWorldX = player.worldX * multiplier;
+        double newPlayerWorldY = player.worldY * multiplier;
 
-        return bufferedImage;
+        player.worldX = newPlayerWorldX;
+        player.worldY = newPlayerWorldY;
+
     }
 
     public void startGameThread() {
@@ -132,13 +93,15 @@ public class TilesPanel extends JPanel implements Runnable {
         }
     }
 
-    private void update() {
+    public void update() {
+        player.update();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        screen.displayOutput(g2,this);
+        tileM.draw(g2);
+        player.draw(g2);
         g2.dispose();
     }
 
