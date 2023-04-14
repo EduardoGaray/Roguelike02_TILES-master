@@ -15,6 +15,11 @@ public class PlayScreen implements Screen {
 
     @Override
     public Screen respondToUserInput(KeyEvent key) {
-        return null;
+        switch (key.getKeyCode()){
+            case KeyEvent.VK_ESCAPE: return new LoseScreen();
+            case KeyEvent.VK_ENTER: return new WinScreen();
+        }
+
+        return this;
     }
 }
