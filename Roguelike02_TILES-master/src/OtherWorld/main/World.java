@@ -25,4 +25,7 @@ public class World {
     public String file(int x, int y){
         return tile(x, y).getFile();
     }
+    public String type(int x, int y){
+        return tile(x, y).getType();
+    }
 }
