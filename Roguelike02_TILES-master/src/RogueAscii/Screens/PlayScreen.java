@@ -154,8 +154,8 @@ public class PlayScreen implements Screen {
 	}
 
 	public PlayScreen() {
-		screenWidth = 80;
-		screenHeight = 21;
+		screenWidth = 70;
+		screenHeight = 20;
 		messages = new ArrayList<String>();
 		createWorld();
 		fov = new FieldOfView(world);
@@ -165,7 +165,7 @@ public class PlayScreen implements Screen {
 	}
 
 	private void createWorld() {
-		world = new WorldBuilder(90, 31, 3).makeCaves().build();
+		world = new WorldBuilder(80, 30, 3).makeCaves().build();
 	}
 
 	public int getPlayerX() {

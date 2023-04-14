@@ -23,8 +23,8 @@ public class PlayScreen implements Screen {
 
     @Override
     public void displayOutput(Graphics2D g2, GamePanel gp) {
-        int left = getScrollX();
-        int top = getScrollY();
+        int left = getScrollX(gp);
+        int top = getScrollY(gp);
         displayTiles(g2, left, top);
     }
 
@@ -51,18 +51,18 @@ public class PlayScreen implements Screen {
                 .build();
     }
 
-    public int getScrollX() {
-        return Math.max(0, Math.min(centerX - screenWidth / 2, world.width() - screenWidth));
+    public int getScrollX(GamePanel gp) {
+        return Math.max(0, Math.min(centerX - gp.maxScreenRow / 2, world.width() - gp.maxScreenRow));
     }
 
-    public int getScrollY() {
-        return Math.max(0, Math.min(centerY - screenHeight / 2, world.height() - screenHeight));
+    public int getScrollY(GamePanel gp) {
+        return Math.max(0, Math.min(centerY - gp.maxScreenCol / 2, world.height() - gp.maxScreenCol));
     }
 
     private void displayTiles(Graphics2D g2, int left, int top) {
         GamePanel gp = new GamePanel();
-        for (int x = 0,screenX = 0; x < screenWidth; x++, screenX+=gp.tileSize){
-            for (int y = 0, screenY = 0; y < screenHeight; y++, screenY+=gp.tileSize){
+        for (int x = 0,screenX = 0; x < gp.maxScreenRow+1; x++, screenX+=gp.tileSize){
+            for (int y = 0, screenY = 0; y < gp.maxScreenCol+1; y++, screenY+=gp.tileSize){
                 int wx = x + left;
                 int wy = y + top;
                 int sx = screenX + left;
@@ -76,7 +76,7 @@ public class PlayScreen implements Screen {
                 }
 
                 g2.drawImage(image, sx, sy, gp.tileSize, gp.tileSize, null);
-                System.out.println("Tile: "+file + "x: "+x+" y: "+y);
+                System.out.println("Tile: "+file + "x: "+x+" y: "+y+" sx: "+sx+" sy: "+sy);
                 //terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
             }
         }
