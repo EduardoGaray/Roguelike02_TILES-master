@@ -1,7 +1,9 @@
 package OtherWorld.main;
 
 import OtherWorld.entity.Player;
+import OtherWorld.screen.Screen;
 import OtherWorld.tile.TileManager;
+import RogueAscii.Screens.StartScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +26,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
 
+    //SCREEN
+    public Screen screen;
+
     //FPS
     int fps = 60;
 
@@ -32,7 +37,6 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread; //When we call this thread, it automatically calls its run() method
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
-
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -100,8 +104,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        tileM.draw(g2);
-        player.draw(g2);
+        screen.displayOutput(g2,this);
         g2.dispose();
     }
 
