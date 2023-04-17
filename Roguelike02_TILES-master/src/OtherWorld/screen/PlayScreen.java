@@ -92,21 +92,24 @@ public class PlayScreen implements Screen {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        for (int x = 0,screenX = 0; x < gp.maxScreenRow+1; x++, screenX+=gp.tileSize){
-            for (int y = 0, screenY = 0; y < gp.maxScreenCol+1; y++, screenY+=gp.tileSize){
+        for (int x = 0,screenX = 0; x < gp.maxScreenRow && screenX <= gp.screenWidth; x++, screenX+=gp.tileSize){
+            for (int y = 0, screenY = 0; y < gp.maxScreenCol && screenY <= gp.screenWidth; y++, screenY+=gp.tileSize){
                 int wx = x + left;
                 int wy = y + top;
-                int sx = screenX + left;
-                int sy = screenY + top;
+                int sx = screenX;
+                int sy = screenY;
                 String file = world.file(wx,wy);
                 if(world.type(wx,wy) == "floor"){
                     g2.drawImage(floor, sx, sy, gp.tileSize, gp.tileSize, null);
+                    //System.out.println("floor x: "+sx+" y: "+sy);
                 }
                 if(world.type(wx,wy) == "wall"){
                     g2.drawImage(wall, sx, sy, gp.tileSize, gp.tileSize, null);
+                    //System.out.println("wall x: "+sx+" y: "+sy);
                 }
                 if(world.type(wx,wy) == "bounds"){
                     g2.drawImage(bounds, sx, sy, gp.tileSize, gp.tileSize, null);
+                    //System.out.println("bounds x: "+sx+" y: "+sy);
                 }
             }
         }
