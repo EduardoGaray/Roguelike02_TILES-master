@@ -59,7 +59,6 @@ public class Player extends Entity {
             }
             // CHECK FOR COLLISION
             collisionOn = false;
-            gp.cChecker.CheckTile(this);
 
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (!collisionOn) {

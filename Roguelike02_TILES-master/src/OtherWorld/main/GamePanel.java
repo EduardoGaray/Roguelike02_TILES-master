@@ -15,8 +15,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int scale = 2; // scale to resolution
 
     public int tileSize = originalTileSize * scale; //48x48 tile
-    public int screenWidth = 1280; //min res 640
-    public int screenHeight = 720; // min res 480
+    public int screenWidth = 640; //min res 640
+    public int screenHeight = 480; // min res 480
 
     public int maxScreenCol = screenHeight / tileSize; // ^ v
     public int maxScreenRow = screenWidth / tileSize; // <>
@@ -33,10 +33,8 @@ public class GamePanel extends JPanel implements Runnable {
     //FPS
     int fps = 60;
 
-    TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler(this);
     Thread gameThread; //When we call this thread, it automatically calls its run() method
-    public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
 
     public GamePanel() {

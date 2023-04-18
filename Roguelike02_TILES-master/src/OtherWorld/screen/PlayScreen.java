@@ -3,6 +3,7 @@ package OtherWorld.screen;
 import OtherWorld.main.GamePanel;
 import OtherWorld.main.World;
 import OtherWorld.main.WorldBuilder;
+import OtherWorld.tile.TileManager;
 import OtherWorld.tile.Tile_old;
 
 import javax.imageio.ImageIO;
@@ -79,19 +80,8 @@ public class PlayScreen implements Screen {
 
     private void displayTiles(Graphics2D g2, int left, int top) {
         GamePanel gp = new GamePanel();
+        TileManager tm = new TileManager();
 
-        BufferedImage floor;
-        BufferedImage wall;
-        BufferedImage bounds;
-
-        try {
-            floor = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
-            wall = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall00.png")));
-            bounds = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png")));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         for (int x = 0,screenX = 0; x < gp.maxScreenRow && screenX <= gp.screenWidth; x++, screenX+=gp.tileSize){
             for (int y = 0, screenY = 0; y < gp.maxScreenCol && screenY <= gp.screenWidth; y++, screenY+=gp.tileSize){
                 int wx = x + left;
@@ -100,15 +90,15 @@ public class PlayScreen implements Screen {
                 int sy = screenY;
                 String file = world.file(wx,wy);
                 if(world.type(wx,wy) == "floor"){
-                    g2.drawImage(floor, sx, sy, gp.tileSize, gp.tileSize, null);
+                    g2.drawImage(tm.getFloor(), sx, sy, gp.tileSize, gp.tileSize, null);
                     //System.out.println("floor x: "+sx+" y: "+sy);
                 }
                 if(world.type(wx,wy) == "wall"){
-                    g2.drawImage(wall, sx, sy, gp.tileSize, gp.tileSize, null);
+                    g2.drawImage(tm.getWall(), sx, sy, gp.tileSize, gp.tileSize, null);
                     //System.out.println("wall x: "+sx+" y: "+sy);
                 }
                 if(world.type(wx,wy) == "bounds"){
-                    g2.drawImage(bounds, sx, sy, gp.tileSize, gp.tileSize, null);
+                    g2.drawImage(tm.getBounds(), sx, sy, gp.tileSize, gp.tileSize, null);
                     //System.out.println("bounds x: "+sx+" y: "+sy);
                 }
             }

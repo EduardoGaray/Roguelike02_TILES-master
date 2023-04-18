@@ -4,6 +4,7 @@ import OtherWorld.main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,99 +12,49 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class TileManager {
-    GamePanel gp;
-    //Right now this is the array that we use to create the current game map, later on we must create every map in a separate array and save/load them as needed
-    public Tile_old[] tileOld;
-    public int[][] mapTileNum;
 
-    public TileManager(GamePanel gp) {
-        //Here we initialize the process to create the map
-        this.gp = gp;
-        tileOld = new Tile_old[gp.maxWorldCol * gp.maxWorldRow];
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+    BufferedImage floor;
+    BufferedImage wall;
+    BufferedImage bounds;
+
+    public BufferedImage getFloor() {
+        return floor;
+    }
+
+    public void setFloor(BufferedImage floor) {
+        this.floor = floor;
+    }
+
+    public BufferedImage getWall() {
+        return wall;
+    }
+
+    public void setWall(BufferedImage wall) {
+        this.wall = wall;
+    }
+
+    public BufferedImage getBounds() {
+        return bounds;
+    }
+
+    public void setBounds(BufferedImage bounds) {
+        this.bounds = bounds;
+    }
+
+    public TileManager() {
         getTileImage();
-        loadMap("/maps/world01.txt");
-
     }
 
     //this method generates basic tiles randomly, we can work on a more complex system for map generation from here
     public void getTileImage() {
         try {
-            tileOld[0] = new Tile_old();
-            tileOld[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
-            tileOld[1] = new Tile_old();
-            tileOld[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall00.png")));
-            tileOld[1].collision = true;
-            tileOld[2] = new Tile_old();
-            tileOld[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png")));
-            tileOld[2].collision = true;
-            tileOld[3] = new Tile_old();
-            tileOld[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earth.png")));
-            tileOld[4] = new Tile_old();
-            tileOld[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree.png")));
-            tileOld[4].collision = true;
-            tileOld[5] = new Tile_old();
-            tileOld[5].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/sand.png")));
+
+            floor = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
+            wall = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall00.png")));
+            bounds = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png")));
+
         } catch (IOException e){
             e.printStackTrace();
-        }
-    }
-
-    public void loadMap(String filepath){
-
-        try{
-            InputStream is = getClass().getResourceAsStream(filepath);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-            int col = 0;
-            int row = 0;
-
-            while (col < gp.maxWorldCol && row < gp.maxWorldRow){
-                String line = br.readLine();
-                while (col < gp.maxWorldCol){
-                    String numbers[] = line.split(" ");
-                    int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[col][row] = num;
-                    col++;
-                }
-                if(col == gp.maxWorldCol){
-                    col = 0;
-                    row++;
-                }
-
-            }
-
-        } catch(Exception e) {
-
-        }
-    }
-    //This method renders the tile array.image property
-    public void draw(Graphics2D g2) {
-        int Worldcol = 0;
-        int Worldrow = 0;
-        while (Worldcol < gp.maxWorldCol && Worldrow < gp.maxWorldRow) {
-
-            int worldX = Worldcol * gp.tileSize;
-            int worldY = Worldrow * gp.tileSize;
-
-            int screenX = (int) (worldX - gp.player.worldX + gp.player.screenX);
-            int screenY = (int) (worldY - gp.player.worldY + gp.player.screenY);
-
-            int tileNum = mapTileNum[Worldcol][Worldrow];
-
-            //this if is necessary to make sure we only render tiles currently on the screen
-            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-                g2.drawImage(tileOld[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-            }
-            Worldcol++;
-
-            if (Worldcol == gp.maxWorldCol) {
-                Worldcol = 0;
-                Worldrow++;
-            }
         }
     }
 }
